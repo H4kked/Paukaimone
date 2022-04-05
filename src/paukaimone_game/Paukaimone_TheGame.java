@@ -1,9 +1,10 @@
 package paukaimone_game;
 
-public class Main {
+public class Paukaimone_TheGame {
 
 	public static void main(String[] args) {
-		System.out.println("Hello World");
+		// TODO Auto-generated method stub
+
 	}
 
 }
