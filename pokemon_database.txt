@@ -1,0 +1,13 @@
+NAME/PV/DEF/ATK/VIT/MAXPV/STATUS
+Carapuce/44/65/48/43/44/NO
+Bulbizarre/45/49/49/45/45/NO
+Mamochon/110/80/130/80/110/NO
+Canarticho/52/55/90/60/52/NO
+Lixy/45/34/65/45/45/NO
+Onix/35/160/45/70/35/NO
+Ouisticram/44/44/58/61/44/NO
+Dracolosse/91/95/134/80/91/NO
+Excelangue/90/75/55/30/90/NO
+Pikachu/35/40/55/90/35/NO
+Palkia/90/120/100/100/90/NO
+Poussifeu/45/40/60/45/45/NO
