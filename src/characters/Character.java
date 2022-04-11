@@ -1,14 +1,19 @@
 package characters;
 
 public abstract class Character {
+	
+	// FIELDS
 	String name;
 	String job;
 	
+	// CONSTRUCTOR
 	public Character(String name, String job) {
 		super();
 		this.name = name;
 		this.job = job;
 	}
+	
+	// GETTERS AND SETTERS
 	public String getName() {
 		return name;
 	}
@@ -22,6 +27,7 @@ public abstract class Character {
 		this.job = job;
 	}
 	
+	// METHODS
 	public void talk(String say)
 	{
 		System.out.println(this.getName() + " : " + say);

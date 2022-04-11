@@ -1,6 +1,7 @@
 package pokemons;
 
 public class Pokemon {
+	// FIELDS
 	private String name;
 	protected int pv;
 	private int max_pv;
@@ -9,6 +10,7 @@ public class Pokemon {
 	private int vit;
 	private Type type;
 	
+	// CONSTRUCTOR
 	public Pokemon(String name, int pv, int def, int atk, int vit, Type type) {
 		super();
 		this.name = name;
@@ -19,6 +21,7 @@ public class Pokemon {
 		this.type = type;
 	}
 
+	// GETTERS AND SETTERS
 	public String getName() {
 		return name;
 	}
@@ -58,11 +61,11 @@ public class Pokemon {
 	public int getMax_pv() {
 		return max_pv;
 	}
-
 	public void setMax_pv(int max_pv) {
 		this.max_pv = max_pv;
 	}
 
+	// METHODS
 	public void talk(String string)
 	{
 		System.out.println(this.getName() + " : " + string);

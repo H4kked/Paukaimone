@@ -1,13 +1,16 @@
 package characters;
 
+// IMPORT FROM SOURCES
 import pokemons.Pokemon;
 
 public class Opponent extends Trainer{
 
+	// CONSTRUCTORS
 	public Opponent(String name, String job, Pokemon pokemon) {
 		super(name, job, pokemon);
 	}
 	
+	// METHODS
 	public void challenge()
 	{
 		talk("I challenge you with my " + this.getPokemon() + " !");
