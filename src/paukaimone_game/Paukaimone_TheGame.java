@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 // Import from sources
 import pokemons.Pokemon;
 import pokemons.Type;
+import pokemons.Attack;
 
 
 public class Paukaimone_TheGame {
@@ -22,6 +23,11 @@ public class Paukaimone_TheGame {
 			{
 				System.out.println(pokemon[i] + "\n");
 			}
+			Attack[] attack = fLoadAttacks();
+			for (int i = 0; i < attack.length; i++)
+			{
+				System.out.println(attack[i] + "\n");
+			}
 		}
 		catch (IOException e){
 			System.out.println(e.getMessage());
@@ -30,10 +36,8 @@ public class Paukaimone_TheGame {
 	
 	// Function to create the pokemon from a text file
 	// Returns an array of type Pokemon
-	public static Pokemon[] fLoadPokemon() throws IOException
+	public static Pokemon[] fLoadPokemon() throws FileNotFoundException
 	{
-		
-		System.out.println("I am in da function");
 		Pokemon[] poke_list = new Pokemon[12]; // We can use an array because our game use don't need to remove pokemon
 		String path = "./pokemon_db.txt";
 		File pokemon_db = new File(path);
@@ -45,7 +49,6 @@ public class Paukaimone_TheGame {
 		while (db_reader.hasNextLine()) 
 		{
 			my_line = db_reader.nextLine();
-			System.out.println(my_line);
 			String[] my_arr = my_line.split("/", 8);
 			Type type = fFindType(my_arr[6]);
 			
@@ -60,10 +63,9 @@ public class Paukaimone_TheGame {
 		db_reader.close();
 		return poke_list; 
 	}
-
-	private static Type fFindType(String string) {
+	private static Type fFindType(String string) 
+	{
 		Type type = Type.NORMAL;
-		System.out.println(string);
 		switch (string)
 		{
 		case "fire":
@@ -101,5 +103,31 @@ public class Paukaimone_TheGame {
 		
 		return type;
 	}
-
+	
+	private static Attack[] fLoadAttacks() throws FileNotFoundException
+	{
+		Attack[] attack_list = new Attack[18];
+		String path = "./attaque_db.txt";
+		File attack_db = new File(path);
+		Scanner db_reader = new Scanner(attack_db);
+		String my_line = db_reader.nextLine();;
+		int count_attack = 0;
+		
+		while (db_reader.hasNextLine())
+		{
+			my_line = db_reader.nextLine();
+			String[] my_arr = my_line.split("/", 5);
+			Type type = fFindType(my_arr[3]);
+			
+			if (type == null) 
+			{
+				System.exit(-1);
+			}
+			
+			attack_list[count_attack] = new Attack(Integer.parseInt(my_arr[2]), Integer.parseInt(my_arr[1]), my_arr[0], type, my_arr[4]);
+			count_attack++;
+		}
+		db_reader.close();		
+		return attack_list;
+	}
 }

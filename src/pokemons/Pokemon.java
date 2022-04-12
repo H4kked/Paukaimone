@@ -9,11 +9,10 @@ public class Pokemon {
 	private int atk;
 	private int vit;
 	private Type type;
-	private String status;
+	private String status; 
 	
 	// CONSTRUCTOR
 	public Pokemon(String name, int pv, int def, int atk, int vit, int max_pv, Type type, String status) {
-		super();
 		this.name = name;
 		this.pv = pv;
 		this.def = def;
@@ -120,6 +119,7 @@ public class Pokemon {
 		this.setPv(pv_restants);
 	}
 
+	// OVERRIDED METHODS
 	@Override
 	public String toString() {
 		return this.getName() + "\nPV : " + this.getPv() + "/" + this.getMax_pv() + "\nStatus : " + this.getStatus() + "\nATK : " + this.getAtk() + "    DEF : " + this.getDef() + "\nVIT : " + this.getVit();
