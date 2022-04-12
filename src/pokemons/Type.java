@@ -8,7 +8,8 @@ public enum Type {
 	GROUND("ground"),
 	FLYING("flying"),
 	ELECTRIC("electric"),
-	WATER("water");
+	WATER("water"),
+	NORMAL("normal");
 	
 	String type;
 

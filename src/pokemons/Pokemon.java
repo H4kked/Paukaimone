@@ -9,9 +9,10 @@ public class Pokemon {
 	private int atk;
 	private int vit;
 	private Type type;
+	private String status;
 	
 	// CONSTRUCTOR
-	public Pokemon(String name, int pv, int def, int atk, int vit, Type type) {
+	public Pokemon(String name, int pv, int def, int atk, int vit, int max_pv, Type type, String status) {
 		super();
 		this.name = name;
 		this.pv = pv;
@@ -19,6 +20,8 @@ public class Pokemon {
 		this.atk = atk;
 		this.vit = vit;
 		this.type = type;
+		this.max_pv = max_pv;
+		this.status = status;
 	}
 
 	// GETTERS AND SETTERS
@@ -63,6 +66,12 @@ public class Pokemon {
 	}
 	public void setMax_pv(int max_pv) {
 		this.max_pv = max_pv;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	// METHODS
