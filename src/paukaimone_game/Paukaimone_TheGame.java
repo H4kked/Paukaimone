@@ -50,7 +50,7 @@ public class Paukaimone_TheGame {
 			my_line = db_reader.nextLine();
 			System.out.println(my_line);
 			String[] my_arr = my_line.split("/", 8);
-			Type type = fFindType(my_arr[]);
+			Type type = fFindType(my_arr[6]);
 			
 			if (type == null)
 			{
