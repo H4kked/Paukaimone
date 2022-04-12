@@ -3,11 +3,8 @@ package paukaimone_game;
 // Import from java libraries
 import java.util.Scanner;
 
-import paukaimone_error.TypeNotFound;
-
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
@@ -23,7 +20,7 @@ public class Paukaimone_TheGame {
 			Pokemon[] pokemon = fLoadPokemon();
 			for (int i = 0; i < pokemon.length; i++)
 			{
-				System.out.println(pokemon[i]);
+				System.out.println(pokemon[i] + "\n");
 			}
 		}
 		catch (IOException e){
@@ -58,7 +55,7 @@ public class Paukaimone_TheGame {
 			}
 			
 			poke_list[count_pokemon] = new Pokemon(my_arr[0], Integer.parseInt(my_arr[1]), Integer.parseInt(my_arr[2]), Integer.parseInt(my_arr[3]), Integer.parseInt(my_arr[4]), Integer.parseInt(my_arr[5]), type, my_arr[7]);
-			
+			count_pokemon++;
 		}
 		db_reader.close();
 		return poke_list; 

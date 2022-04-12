@@ -119,4 +119,10 @@ public class Pokemon {
 		pv_restants = this.getPv() - pv;
 		this.setPv(pv_restants);
 	}
+
+	@Override
+	public String toString() {
+		return this.getName() + "\nPV : " + this.getPv() + "/" + this.getMax_pv() + "\nStatus : " + this.getStatus() + "\nATK : " + this.getAtk() + "    DEF : " + this.getDef() + "\nVIT : " + this.getVit();
+	}
+	
 }
