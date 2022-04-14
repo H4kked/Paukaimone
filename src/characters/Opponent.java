@@ -22,4 +22,9 @@ public class Opponent extends Trainer{
 		player.setPokemon(this.getPokemon());
 		sys_talk("You obtained " + this.getName() + "'s pokemon, " + this.getPokemon() + " !");
 	}
+	public void attack()
+	{
+		int rand = (int) Math.random()%4;
+		
+	}
 }

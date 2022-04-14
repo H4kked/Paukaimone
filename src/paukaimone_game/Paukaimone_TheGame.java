@@ -10,6 +10,5 @@ public class Paukaimone_TheGame {
 	// Main function 
 	public static void main(String[] args) {
 		Loader loader = new Loader();
-		
 	}
 }

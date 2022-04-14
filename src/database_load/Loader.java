@@ -223,7 +223,7 @@ public class Loader {
 				String name = keyboard.nextLine();
 				System.out.println("Job ?");
 				String job = keyboard.nextLine();
-				this.setPlayer(new Player(name, job, this.getPoke_list()[9]));		
+				this.setPlayer(new Player(name, job, this.getPoke_list()[9], 0));		
 				keyboard.close();
 			}
 			else if (my_arr[0].equals("Pierre")) 
