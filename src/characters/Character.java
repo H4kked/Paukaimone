@@ -38,6 +38,6 @@ public abstract class Character {
 	}
 	public void introduce()
 	{
-		System.out.println("Hello ! I am " + this.getName() + " and I am a " + this.getJob() + ".");
+		System.out.println("Hello ! I am " + this.getName() + " the " + this.getJob() + ".");
 	}
 }
