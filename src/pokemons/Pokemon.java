@@ -10,6 +10,7 @@ public class Pokemon {
 	private int vit;
 	private Type type;
 	private String status; 
+	private Attack[] attack;
 	
 	// CONSTRUCTOR
 	public Pokemon(String name, int pv, int def, int atk, int vit, int max_pv, Type type, String status) {
@@ -21,6 +22,7 @@ public class Pokemon {
 		this.type = type;
 		this.max_pv = max_pv;
 		this.status = status;
+		this.attack = new Attack[4];
 	}
 
 	// GETTERS AND SETTERS
@@ -71,6 +73,14 @@ public class Pokemon {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Attack[] getAttack() {
+		return attack;
+	}
+
+	public void setAttack(Attack[] attack) {
+		this.attack = attack;
 	}
 
 	// METHODS
