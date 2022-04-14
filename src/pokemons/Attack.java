@@ -55,5 +55,4 @@ public class Attack {
 	public String toString() {
 		return this.getName() + "\n" + this.getType() + "\nPWR : " + this.getPower() + "   PRC : " + this.getPrecision();
 	}
-		
 }
