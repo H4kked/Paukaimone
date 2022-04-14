@@ -1,17 +1,8 @@
 package paukaimone_game;
 
 // Import from java libraries
-import java.util.Scanner;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.MalformedURLException;
 
 // Import from sources
-import pokemons.Pokemon;
-import pokemons.Type;
-import pokemons.Attack;
 import database_load.Loader;
 
 
