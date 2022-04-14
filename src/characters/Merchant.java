@@ -9,20 +9,22 @@ public class Merchant extends Character implements Sell{
 	// CONSTRUCTOR
 	public Merchant(String name, String job) {
 		super(name, job);
-		// TODO Auto-generated constructor stub
 	}
 
 	// METHODS
 	@Override
-	public void sell() {
-		// TODO Auto-generated method stub
+	public void sell(int i) {
+		talk("Sure, here you are dear customer !");
+	}
+	@Override
+	public void buy(int i) {
+		talk("Wow, thank you dear customer !");
 		
 	}
 	@Override
-	public void buy() {
-		// TODO Auto-generated method stub
-		
+	public void introduce()
+	{
+		talk("Hello my dear customer welcome welcome welcome !");
+		talk("I am " + this.name + " the merchant, what can I do for you?");
 	}
-
-	
 }

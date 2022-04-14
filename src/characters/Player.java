@@ -3,6 +3,7 @@ package characters;
 //Import form sources
 import objects.Potion;
 import objects.Superpotion;
+import objects.Pokeball;
 import pokemons.Pokemon;
 import interfaces.Sell;
 
@@ -12,10 +13,13 @@ import java.util.Scanner;
 public class Player extends Trainer implements Sell{
 	// FIELDS
 	Integer[] inventory = new Integer[4];
+	int money;
+	boolean isfightingpierre;
 	
 	// CONSTRUCTOR
-	public Player(String name, String job, Pokemon pokemon) {
+	public Player(String name, String job, Pokemon pokemon, int money) {
 		super(name, job, pokemon);
+		money = this.money;
 	}
 
 	// GETTERS AND SETTERS
@@ -24,6 +28,12 @@ public class Player extends Trainer implements Sell{
 	}
 	public void setInventory(Integer[] inventory) {
 		this.inventory = inventory;
+	}
+	public int getMoney() {
+		return money;
+	}
+	public void setMoney(int money) {
+		this.money = money;
 	}
 
 	// METHODS
@@ -107,13 +117,59 @@ public class Player extends Trainer implements Sell{
 		}
 	}
 	@Override
-	public void sell() {
-		// TODO
-		
+	public void sell(int i) {
+		if (this.inventory[i] > 0)
+		{
+			this.inventory[i]--;
+			switch(i)
+			{
+				case 1:
+					this.setMoney(this.getMoney() + 15);
+				case 2:
+					this.setMoney(this.getMoney() + 20);
+				case 3:
+					this.setMoney(this.getMoney() + 15);
+				case 4:
+					this.setMoney(this.getMoney() + 10);
+				default:
+					sys_talk("Please enter a valid number.");
+			}
+		}
+		else
+		{
+			sys_talk("You do not have this object.");
+		}
 	}
 	@Override
-	public void buy() {
-		// TODO
-		
+	public void buy(int i) {
+		switch(i)
+		{
+			case 1:
+				if (this.getMoney() > 15)
+				{
+					this.inventory[i]++;
+					this.setMoney(this.getMoney() - 15);
+				}
+			case 2:
+				if (this.getMoney() > 20)
+				{
+					this.inventory[i]++;
+					this.setMoney(this.getMoney() - 20);
+				}
+			case 3:
+				if (this.getMoney() > 15)
+				{
+					this.inventory[i]++;
+					this.setMoney(this.getMoney() - 15);
+				}
+			case 4:
+				if (this.getMoney() > 10)
+				{
+					this.inventory[i]++;
+					this.setMoney(this.getMoney() - 10);
+				}
+			default:
+				sys_talk("Please enter a valid number.");
+		}
 	}
 }

@@ -99,8 +99,6 @@ public class Paukaimone_TheGame {
 			System.out.println("TYPE NOT FOUND");
 			type = null;
 		}
-		
-		
 		return type;
 	}
 	
