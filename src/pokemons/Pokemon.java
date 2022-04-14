@@ -128,6 +128,14 @@ public class Pokemon {
 		pv_restants = this.getPv() - pv;
 		this.setPv(pv_restants);
 	}
+	public void fDisplayAttack()
+	{
+		for (int i = 0; i < this.getAttack().length; i++)
+		{
+			System.out.println(this.getAttack()[i].getName());
+		}
+	}
+	
 
 	// OVERRIDED METHODS
 	@Override

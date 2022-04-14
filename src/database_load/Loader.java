@@ -7,17 +7,28 @@ import java.util.Scanner;
 import pokemons.Attack;
 import pokemons.Pokemon;
 import pokemons.Type;
+import characters.Opponent;
+import characters.Player;
+import characters.Medic;
+import characters.Merchant;
 
 public class Loader {
 	private Attack[] attack_list;
 	private Pokemon[] poke_list;
+	private Opponent[] opponent_list;
+	private Opponent[] master_list;
+	private Player player;
+	private Merchant merchant;
+	private Medic medic;
 	
 	public Loader() {
-		this.attack_list = new Attack[18];
-		this.poke_list = new Pokemon[12];
+		this.merchant = new Merchant("Benoit", "Merchant");
+		this.medic = new Medic("Mathilde", "Nurse");
 		try {
 			this.setAttack_list(this.fLoadAttacks());
 			this.setPoke_list(this.fLoadPokemon());
+			this.fMatchAttack();
+			this.fLoadTrainers();
 		}
 		catch (FileNotFoundException e) 
 		{
@@ -37,6 +48,36 @@ public class Loader {
 	}
 	public void setAttack_list(Attack[] attack_list) {
 		this.attack_list = attack_list;
+	}
+	public Opponent[] getOpponent_list() {
+		return opponent_list;
+	}
+	public Opponent[] getMaster_list() {
+		return master_list;
+	}
+	public Player getPlayer() {
+		return player;
+	}
+	public void setOpponent_list(Opponent[] opponent_list) {
+		this.opponent_list = opponent_list;
+	}
+	public void setMaster_list(Opponent[] master_list) {
+		this.master_list = master_list;
+	}
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+	public Merchant getMerchant() {
+		return merchant;
+	}
+	public Medic getMedic() {
+		return medic;
+	}
+	public void setMerchant(Merchant merchant) {
+		this.merchant = merchant;
+	}
+	public void setMedic(Medic medic) {
+		this.medic = medic;
 	}
 
 	// Function to create the pokemon from a text file
@@ -135,7 +176,72 @@ public class Loader {
 		return attack_list;
 	}
 	public void fMatchAttack() {
-		// TODO combolist
+		Integer[][] combolist = {
+				{2,4,9,10}, 
+				{4,7,8,11}, 
+				{1,2,3,4}, 
+				{2,4,5,6}, 
+				{6,12,14,16}, 
+				{6,9,17,18}, 
+				{4,12,16,17}, 
+				{12,14,16,18}, 
+				{11,12,13,14},
+				{2,4,7,8},
+				{1,12,15,16},
+				{1,12,13,14}
+			};
+		
+		for (int poke_index = 0; poke_index < this.getPoke_list().length; poke_index++)
+		{
+			Attack[] attack_list = new Attack[4];
+			for (int attack_index = 0; attack_index < 4; attack_index++)
+			{
+				attack_list[attack_index] = this.getAttack_list()[combolist[poke_index][attack_index] - 1];
+			}
+			this.getPoke_list()[poke_index].setAttack(attack_list);
+		}
 	}
-	
+	public void fLoadTrainers() throws FileNotFoundException
+	{
+		Opponent[] opponent_list = new Opponent[9];
+		Opponent[] master_list = new Opponent[2];
+		String path = "./opponent_db.txt";
+		File opponent_db = new File(path);
+		Scanner db_reader = new Scanner(opponent_db);
+		String my_line = db_reader.nextLine();
+		int count_opponent = 0;
+		
+		while (db_reader.hasNextLine())
+		{
+			my_line = db_reader.nextLine();
+			String[] my_arr = my_line.split("/", 2);
+			
+			if (my_arr[0].equals("Player"))
+			{
+				Scanner keyboard = new Scanner(System.in);
+				System.out.println("What is your name again ?");
+				String name = keyboard.nextLine();
+				System.out.println("Job ?");
+				String job = keyboard.nextLine();
+				this.setPlayer(new Player(name, job, this.getPoke_list()[9]));		
+				keyboard.close();
+			}
+			else if (my_arr[0].equals("Pierre")) 
+			{
+				master_list[0] = new Opponent(my_arr[0], my_arr[1], this.getPoke_list()[10]);
+			}
+			else if (my_arr[0].equals("Mathis"))
+			{
+				master_list[1] = new Opponent(my_arr[0], my_arr[1], this.getPoke_list()[11]);
+			}
+			else 
+			{
+				opponent_list[count_opponent] = new Opponent(my_arr[0], my_arr[1], this.getPoke_list()[count_opponent]);
+				count_opponent++;
+			}
+		}
+		db_reader.close();
+		this.setOpponent_list(opponent_list);
+		this.setMaster_list(master_list);
+	}
 }

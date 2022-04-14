@@ -10,13 +10,6 @@ public class Paukaimone_TheGame {
 	// Main function 
 	public static void main(String[] args) {
 		Loader loader = new Loader();
-		for (int i = 0; i < loader.getPoke_list().length; i++)
-		{
-			System.out.println(loader.getPoke_list()[i] + "\n");
-		}
-		for (int i = 0; i < loader.getAttack_list().length; i++)
-		{
-			System.out.println(loader.getAttack_list()[i] + "\n");
-		}
+		
 	}
 }
