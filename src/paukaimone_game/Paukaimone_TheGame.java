@@ -6,14 +6,14 @@ package paukaimone_game;
 import database_load.Loader;
 import java.util.Scanner;
 
-import scripts.Scripts;
+import scripts.Script;
 
 
 public class Paukaimone_TheGame {
 	// Main function 
 	public static void main(String[] args) {
 		Scanner keyboard = new Scanner(System.in);
-		Scripts script = new Scripts();
+		Script script = new Script();
 		Loader loader = new Loader(keyboard);
 		script.fStartAdventure(loader.getPlayer());
 		script.fChoosePokemon(loader.getPlayer(), loader.getStarter(), keyboard);

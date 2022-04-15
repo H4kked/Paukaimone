@@ -5,13 +5,14 @@ import java.util.Scanner;
 
 import java.util.concurrent.TimeUnit;
 import characters.Player;
+import database_load.Loader;
 import characters.Merchant;
 import characters.Opponent;
 import characters.Medic;
 import pokemons.Pokemon;
 
-public class Scripts {
-	public Scripts(){
+public class Script {
+	public Script(){
 		fBeginningScript();
 	}
 	
@@ -41,11 +42,11 @@ public class Scripts {
 	
 	public void fBeginningScript()
 	{
-		System.out.println("??? : Hello there! Welcome to the world of PAUKAIMONE! My name is LAYTON!");
+		System.out.println("??? : Hello there! Welcome to the world of PAUKAIMONE ! My name is LAYTON !");
 		this.fWait();
-		System.out.println("\nPr Layton : People call me the PAUKAIMONE PROF!");
+		System.out.println("\nPr Layton : People call me the PAUKAIMONE PROF !");
 		this.fWait();
-		System.out.println("\nPr Layton : This world is inhabited by creatures called PAUKAIMONE!");
+		System.out.println("\nPr Layton : This world is inhabited by creatures called PAUKAIMONE !");
 		this.fWait();
 		System.out.println("\nPr Layton : For some people, PAUKAIMONE are pets, Others use them for fights.");
 		this.fWait();
@@ -56,22 +57,23 @@ public class Scripts {
 	}
 	public void fStartAdventure(Player player)
 	{
-		System.out.println("\nPr Layton : " + player.getName() + ", Your very own PAUKAIMONE legend is about to unfold!");
+		System.out.println("\nPr Layton : " + player.getName() + ", Your very own PAUKAIMONE legend is about to unfold !");
 		this.fWait();
-		System.out.println("\nPr Layton : A world of dreams and adventures with PAUKAIMONE awaits! Let's go!");
+		System.out.println("\nPr Layton : A world of dreams and adventures with PAUKAIMONE awaits ! Let's go !");
 		this.fWait();
 	}
 
 	public void fChoosePokemon(Player player, Pokemon[] starter, Scanner keyboard) {
-		System.out.println("\nPr Layton : Hey " + player.getName() + ", there are 3 PAUKAIMONE here!");
+		System.out.println("\nPr Layton : Hey " + player.getName() + ", there are 3 PAUKAIMONE here !");
 		this.fWait();
-		System.out.println("\nPr Layton : They are inside the PAUKAIBALLS!");
+		System.out.println("\nPr Layton : They are inside the PAUKAIBAULES !");
 		this.fWait();
-		System.out.println("\nPr Layton : There are only 3 left but you can have one! Choose!\n");
+		System.out.println("\nPr Layton : There are only 3 left but you can have one ! Choose !");
 		this.fWait();
 		for (int j = 0; j < 3; j++)
 		{
 			int count = 0;
+			sys_talk("");
 			for (int i = 0; i<starter.length; i++)
 			{
 				if (starter[i] != null)
@@ -92,30 +94,60 @@ public class Scripts {
 			switch (starter[(int) choice - 49].getName())
 			{
 				case "Ouisticram":
-					System.out.println("\nPr Layton : Nope, this PAUKAIMONE is mine");
+					System.out.println("\nPr Layton : Nope, this PAUKAIMONE is mine.");
 					starter[(int) choice - 49] = null;
 					break;
 				case "Bulbizarre":
-					sys_talk("\nYou scared Bulbizarre");
+					sys_talk("\nYou scared Bulbizarre...");
 					this.fWait();
 					System.out.print("\nPr Layton : It seems Bulbizarre is scared of you... ");
 					this.fWait();
-					System.out.println("I can't let you take this PAUKAIMONE please choose another one");
+					System.out.println("I can't let you take this PAUKAIMONE please choose another one.");
 					starter[(int) choice - 49] = null;
 					break;
 				case "Carapuce":
-					sys_talk("\nCarapuce immediately ran away when seeing you");
+					sys_talk("\nCarapuce immediately ran away when seeing you...");
 					this.fWait();
 					System.out.print("\nPr layton : Hum... ");
 					this.fWait();
-					System.out.println("I wasn't expecting that");
+					System.out.println("I wasn't expecting that...");
 					starter[(int) choice - 49] = null;
 					break;
 				default:
 					System.out.println("UNEXPECTED ERROR");
 					break;
 			}
+			this.fWait();
 		}
-		keyboard.close();
+		System.out.println("\nPr Layton : Seems like no PAUKAIMONE wants to be yours...");
+		this.fWait();
+		System.out.println("\nPr Layton : I have an idea. Here take this Pikachu !");
+		sys_talk("\nYou obtain a Pikachu ! ");
+		sys_talk(player.getPokemon().toString());
+		this.fWait();
+		System.out.println("\nPr Layton : Before you go on your adventure, I have a last question for you.");
+		this.fWait();
+		System.out.println("\nPr Layton : Do you prefer 1 or 2 ?");
+		char choice = 48;
+		do {
+			System.out.print("> ");
+			choice = keyboard.nextLine().charAt(0);
+		} while (choice <= 48 || choice > 50);
+		if ((int) choice - 48 == 1)
+		{
+			player.setIsfightingpierre(true);
+		}
+		else 
+		{
+			player.setIsfightingpierre(false);
+		}
+	}
+	
+	public void game(Loader load)
+	{
+		for (int i = 0; i < load.getOpponent_list().length; i++)
+		{
+			load.getOpponent_list()[i].introduce();
+		}
 	}
 }

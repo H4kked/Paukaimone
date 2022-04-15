@@ -35,6 +35,12 @@ public class Player extends Trainer implements Sell{
 	public void setMoney(int money) {
 		this.money = money;
 	}
+	public boolean getIsfightingpierre() {
+		return isfightingpierre;
+	}
+	public void setIsfightingpierre(boolean isfightingpierre) {
+		this.isfightingpierre = isfightingpierre;
+	}
 
 	// METHODS
 	public void useObject(int i)
