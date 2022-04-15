@@ -4,24 +4,18 @@ package paukaimone_game;
 
 // Import from sources
 import database_load.Loader;
+import java.util.Scanner;
+
 import scripts.Scripts;
 
 
 public class Paukaimone_TheGame {
 	// Main function 
 	public static void main(String[] args) {
+		Scanner keyboard = new Scanner(System.in);
 		Scripts script = new Scripts();
-		Loader loader = new Loader();
-<<<<<<< HEAD
-		for (int i = 0; i < loader.getPoke_list().length; i++)
-		{
-			System.out.println(loader.getPoke_list()[i] + "\n");
-		}
-		for (int i = 0; i < loader.getAttack_list().length; i++)
-		{
-			System.out.println(loader.getAttack_list()[i] + "\n");
-		}
-=======
->>>>>>> branch 'mathis' of https://github.com/H4kked/Paukaimone
+		Loader loader = new Loader(keyboard);
+		script.fStartAdventure(loader.getPlayer());
+		script.fChoosePokemon(loader.getPlayer(), loader.getStarter(), keyboard);
 	}
 }

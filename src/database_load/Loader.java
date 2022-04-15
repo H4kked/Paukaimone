@@ -15,20 +15,22 @@ import characters.Merchant;
 public class Loader {
 	private Attack[] attack_list;
 	private Pokemon[] poke_list;
+	private Pokemon[] starter;
 	private Opponent[] opponent_list;
 	private Opponent[] master_list;
 	private Player player;
 	private Merchant merchant;
 	private Medic medic;
 	
-	public Loader() {
+	public Loader(Scanner keyboard) {
 		this.merchant = new Merchant("Benoit", "Merchant");
 		this.medic = new Medic("Mathilde", "Nurse");
+		this.setStarter(new Pokemon[3]);
 		try {
 			this.setAttack_list(this.fLoadAttacks());
 			this.setPoke_list(this.fLoadPokemon());
 			this.fMatchAttack();
-			this.fLoadTrainers();
+			this.fLoadTrainers(keyboard);
 		}
 		catch (FileNotFoundException e) 
 		{
@@ -80,16 +82,26 @@ public class Loader {
 		this.medic = medic;
 	}
 
+	public Pokemon[] getStarter() {
+		return starter;
+	}
+
+	public void setStarter(Pokemon[] starter) {
+		this.starter = starter;
+	}
+
 	// Function to create the pokemon from a text file
 	// Returns an array of type Pokemon
 	public Pokemon[] fLoadPokemon() throws FileNotFoundException
 	{
 		Pokemon[] poke_list = new Pokemon[12]; // We can use an array because our game use don't need to remove pokemon
+		Pokemon[] starter = new Pokemon[3];
 		String path = "./pokemon_db.txt";
 		File pokemon_db = new File(path);
 		Scanner db_reader = new Scanner(pokemon_db);
 		String my_line = "";
 		int count_pokemon = 0;
+		int count_starter = 0;
 		db_reader.nextLine(); // This line is the example of how the pokemon have to be stored so we can skip it
 		
 		while (db_reader.hasNextLine()) 
@@ -103,10 +115,17 @@ public class Loader {
 				System.exit(-1);
 			}
 			
+			if (my_arr[0].equals("Bulbizarre") || my_arr[0].equals("Carapuce") || my_arr[0].equals("Ouisticram"))
+			{
+				starter[count_starter] = new Pokemon(my_arr[0], Integer.parseInt(my_arr[1]), Integer.parseInt(my_arr[2]), Integer.parseInt(my_arr[3]), Integer.parseInt(my_arr[4]), Integer.parseInt(my_arr[5]), type, my_arr[7]);
+				count_starter++;
+			}
+			
 			poke_list[count_pokemon] = new Pokemon(my_arr[0], Integer.parseInt(my_arr[1]), Integer.parseInt(my_arr[2]), Integer.parseInt(my_arr[3]), Integer.parseInt(my_arr[4]), Integer.parseInt(my_arr[5]), type, my_arr[7]);
 			count_pokemon++;
 		}
 		db_reader.close();
+		this.setStarter(starter);
 		return poke_list; 
 	}
 	public Type fFindType(String string) 
@@ -201,7 +220,7 @@ public class Loader {
 			this.getPoke_list()[poke_index].setAttack(attack_list);
 		}
 	}
-	public void fLoadTrainers() throws FileNotFoundException
+	public void fLoadTrainers(Scanner keyboard) throws FileNotFoundException
 	{
 		Opponent[] opponent_list = new Opponent[9];
 		Opponent[] master_list = new Opponent[2];
@@ -218,15 +237,13 @@ public class Loader {
 			
 			if (my_arr[0].equals("Player"))
 			{
-				Scanner keyboard = new Scanner(System.in);
 				System.out.println("\nPr Layton : But enough about me, what is your name again ?");
 				System.out.print(">");
 				String name = keyboard.nextLine();
 				System.out.println("\nPr Layton : Oh " + name + ", and what is the best word to describe yourself ?");
 				System.out.print(">");
 				String job = keyboard.nextLine();
-				this.setPlayer(new Player(name, job, this.getPoke_list()[9], 0));		
-				keyboard.close();
+				this.setPlayer(new Player(name, job, this.getPoke_list()[9], 0));
 			}
 			else if (my_arr[0].equals("Pierre")) 
 			{
