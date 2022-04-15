@@ -30,7 +30,7 @@ public abstract class Character {
 	// METHODS
 	public void talk(String say)
 	{
-		System.out.println(this.getName() + " : " + say);
+		System.out.println(this.getName() + " : " + say + "\n");
 	}
 	public void sys_talk(String say)
 	{
@@ -38,6 +38,6 @@ public abstract class Character {
 	}
 	public void introduce()
 	{
-		System.out.println("Hello ! I am " + this.getName() + " the " + this.getJob() + ".");
+		System.out.println("Hello ! I am " + this.getName() + " the " + this.getJob() + ".\n");
 	}
 }

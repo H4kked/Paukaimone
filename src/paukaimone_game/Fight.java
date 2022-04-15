@@ -10,12 +10,13 @@ import pokemons.Pokemon;
 import pokemons.Type;
 
 public class Fight {
-	public void sys_talk(String say)
+	public static void sys_talk(String say)
 	{
 		System.out.println(say);
 	}
 	public void fight(Player player, Opponent opponent)
 	{
+		Scanner keyboard = new Scanner(System.in);
 		if (player.getPokemon().getVit() >= opponent.getPokemon().getVit())
 		{
 			while (player.getPokemon().getPv() > 0 && opponent.getPokemon().getPv() > 0)
@@ -23,13 +24,13 @@ public class Fight {
 				// TODO DISPLAY THE LIST OF THE ATTACKS OF THE POKEMON
 				char ans = 0;
 				sys_talk("Choose your attack : ");
-				Scanner keyboard = new Scanner(System.in);
 				while (ans != 49 || ans != 50 || ans != 51 || ans != 52)
 				{
 					ans = keyboard.nextLine().charAt(0);
 				}
 				ans--;
-				opponent.getPokemon().ouch(calculateDmg(player, opponent, null)); //TODO COMPLETE WITH THE RIGHT ATTACK
+				sys_talk(player.getPokemon().getName() + " uses " + player.getPokemon().getAttack()[ans] + " !");
+				opponent.getPokemon().ouch(calculateDmg(player, opponent, player.getPokemon().getAttack()[ans]));
 				
 				if (player.getPokemon().getPv() <= 0 || opponent.getPokemon().getPv() <= 0)
 				{
@@ -38,7 +39,8 @@ public class Fight {
 				
 				// TODO DISPLAY THE LIST OF THE ATTACKS OF THE POKEMON
 				ans = (char)((int) Math.random() * (51 - 48) + 48);
-				player.getPokemon().ouch(calculateDmg(opponent, player, null)); //TODO SAME
+				sys_talk(opponent.getPokemon().getName() + " uses " + opponent.getPokemon().getAttack()[ans] + " !");
+				player.getPokemon().ouch(calculateDmg(opponent, player, opponent.getPokemon().getAttack()[ans]));
 				
 				if (player.getPokemon().getPv() <= 0 || opponent.getPokemon().getPv() <= 0)
 				{
@@ -52,8 +54,9 @@ public class Fight {
 			{
 				// TODO DISPLAY THE LIST OF THE ATTACKS OF THE POKEMON
 				char ans = (char)((int) Math.random() * (51 - 48) + 48);
-				player.getPokemon().ouch(calculateDmg(opponent, player, null)); //TODO SAME
-				
+				sys_talk(opponent.getPokemon().getName() + " uses " + opponent.getPokemon().getAttack()[ans] + " !");
+				player.getPokemon().ouch(calculateDmg(opponent, player, opponent.getPokemon().getAttack()[ans]));
+
 				if (player.getPokemon().getPv() <= 0 || opponent.getPokemon().getPv() <= 0)
 				{
 					break;
@@ -62,13 +65,13 @@ public class Fight {
 				// TODO DISPLAY THE LIST OF THE ATTACKS OF THE POKEMON
 				ans = 0;
 				sys_talk("Choose your attack : ");
-				Scanner keyboard = new Scanner(System.in);
 				while (ans != 49 || ans != 50 || ans != 51 || ans != 52)
 				{
 					ans = keyboard.nextLine().charAt(0);
 				}
 				ans--;
-				opponent.getPokemon().ouch(calculateDmg(player, opponent, null)); //TODO COMPLETE WITH THE RIGHT ATTACK
+				sys_talk(player.getPokemon().getName() + " uses " + player.getPokemon().getAttack()[ans] + " !");
+				opponent.getPokemon().ouch(calculateDmg(player, opponent, player.getPokemon().getAttack()[ans]));
 				
 				if (player.getPokemon().getPv() <= 0 || opponent.getPokemon().getPv() <= 0)
 				{
@@ -76,6 +79,7 @@ public class Fight {
 				}
 			}
 		}
+		keyboard.close();
 	}
 	public static int calculateDmg(Trainer attacker, Trainer defenser, Attack attack)
 	{
@@ -110,6 +114,7 @@ public class Fight {
 		int number = (int) Math.random() %20;
 		if (number == 1)
 		{
+			sys_talk("Critical hit !");
 			return 2;
 		}
 		else

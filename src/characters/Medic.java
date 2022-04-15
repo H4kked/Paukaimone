@@ -1,5 +1,7 @@
 package characters;
 
+import java.util.Scanner;
+
 // IMPORT FROM SOURCES
 import interfaces.Heal;
 import pokemons.Pokemon;
@@ -16,5 +18,24 @@ public class Medic extends Character implements Heal {
 	@Override
 	public void heal(Pokemon pokemon) {
 		pokemon.setPv(pokemon.getMax_pv());		
+	}
+	public void interaction(Player player, Scanner keyboard)
+	{
+		talk("Would you like me to heal your pokemon ? ^^ (y/n)");
+		char ans = 0;
+		do
+		{
+			ans = keyboard.nextLine().charAt(0);
+		}
+		while (ans != 89 || ans != 121 || ans != 78 || ans != 100);
+		if (ans == 89 || ans == 121)
+		{
+			heal(player.getPokemon());
+			talk("Here you are, little Paukaimone. Thank you for passing by, see you soon ! ^^");
+		}
+		else
+		{
+			talk("Oh, ok. Well, see you soon ! ^^");
+		}
 	}
 }
