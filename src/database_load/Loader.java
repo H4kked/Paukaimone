@@ -219,9 +219,11 @@ public class Loader {
 			if (my_arr[0].equals("Player"))
 			{
 				Scanner keyboard = new Scanner(System.in);
-				System.out.println("What is your name again ?");
+				System.out.println("\nPr Layton : But enough about me, what is your name again ?");
+				System.out.print(">");
 				String name = keyboard.nextLine();
-				System.out.println("Job ?");
+				System.out.println("\nPr Layton : Oh " + name + ", and what is the best word to describe yourself ?");
+				System.out.print(">");
 				String job = keyboard.nextLine();
 				this.setPlayer(new Player(name, job, this.getPoke_list()[9], 0));		
 				keyboard.close();
