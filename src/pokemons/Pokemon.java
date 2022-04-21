@@ -90,7 +90,7 @@ public class Pokemon {
 	}
 	public void sys_talk(String say)
 	{
-		System.out.println(say);
+		System.out.println(say + "\n");
 	}
 	public void regen(int pv) {
 		int new_pv;

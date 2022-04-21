@@ -2,6 +2,7 @@ package characters;
 
 //Import form sources
 import objects.Potion;
+import objects.Statuspotion;
 import objects.Superpotion;
 import objects.Pokeball;
 import pokemons.Pokemon;
@@ -70,43 +71,46 @@ public class Player extends Trainer implements Sell{
 				sys_talk("You cannot use that here.");
 				break;
 			case 4:
-				// TO DO IF STATUS POTION IMPLEMENTED
+				// THE USER HAS CHOSEN A STATUSPOTION
+				Statuspotion statuspotion = new Statuspotion("statuspotion", 0);
+				statuspotion.use(this.getPokemon());
 				break;
 			}
 		}
 		this.setInventory(inventory);
 	}
-	public void pokesteal(Opponent opponent)
+	public void pokesteal(Opponent opponent, Scanner keyboard)
 	{
+		opponent.getPokemon().setPv(opponent.getPokemon().getMax_pv());
 		sys_talk("You have defeated " + opponent.getName() + " !");
 		sys_talk("Would you like to steal his pokemon ? (y/n)");
 		char ans = 0;
-		Scanner keyboard = new Scanner(System.in);
 		do
 		{
+			System.out.print("> ");
 			ans = keyboard.nextLine().charAt(0);
 		}
-		while (ans != 89 || ans != 121 || ans != 78 || ans != 100);
-		if (ans == 78 || ans == 100)
+		while ((ans != 'y') && (ans != 'Y') && (ans != 'n') && (ans != 'N'));
+		if (ans == 'n' || ans == 'N')
 		{
 			// THE USER HAS A POKEBALL
 			if (this.inventory[3] > 0)
 			{
 				this.inventory[3]--;
 				capture();
+				this.getPokemon().setPv(this.getPokemon().getMax_pv());
 			}
 			// THE USER DOES NOT HAVE A POKEBALL
 			else
 			{
 				sys_talk("You do not possess a pokeball to catch your fleeing pokemon.");
-				ans = 89;
+				ans = 'y';
 			}
 		}
-		if (ans == 89 || ans == 121)
+		if (ans == 'Y' || ans == 'y')
 		{
 			opponent.lose_pokemon(this);
 		}
-		keyboard.close();
 	}
 	public void capture()
 	{

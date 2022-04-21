@@ -19,5 +19,5 @@ public abstract class Trainer extends Character{
 	}
 	public void setPokemon(Pokemon pokemon) {
 		this.pokemon = pokemon;
-	}
+	}	
 }

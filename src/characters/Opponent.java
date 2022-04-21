@@ -13,13 +13,15 @@ public class Opponent extends Trainer{
 	// METHODS
 	public void challenge()
 	{
-		talk("I challenge you with my " + this.getPokemon() + " !");
+		talk("I challenge you with my " + this.getPokemon().getName() + " !");
+		this.getPokemon().talk(this.getPokemon().getName() + " !");
 	}
 	public void lose_pokemon(Player player)
 	{
 		talk("No way ! I lost !");
-		talk(this.getPokemon() + " ? What are you doing ? Hey !");
+		talk(this.getPokemon().getName() + " ? What are you doing ? Hey !\n");
 		player.setPokemon(this.getPokemon());
-		sys_talk("You obtained " + this.getName() + "'s pokemon, " + this.getPokemon() + " !");
+		sys_talk("You obtained " + this.getName() + "'s pokemon, " + this.getPokemon().getName() + " !\n");
+		sys_talk(this.getPokemon() + "\n");
 	}
 }

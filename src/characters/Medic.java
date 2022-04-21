@@ -27,8 +27,8 @@ public class Medic extends Character implements Heal {
 		{
 			ans = keyboard.nextLine().charAt(0);
 		}
-		while (ans != 89 || ans != 121 || ans != 78 || ans != 100);
-		if (ans == 89 || ans == 121)
+		while (ans != 'y' || ans != 'Y' || ans != 'n' || ans != 'N');
+		if (ans == 'y' || ans == 'Y')
 		{
 			heal(player.getPokemon());
 			talk("Here you are, little Paukaimone. Thank you for passing by, see you soon ! ^^");
