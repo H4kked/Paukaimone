@@ -4,7 +4,7 @@ public class Pokemon {
 	// FIELDS
 	private String name;
 	protected int pv;
-	private int max_pv;
+	private int max_pv; // used to set the pokemon's hp to the max
 	private int def;
 	private int atk;
 	private int vit;
@@ -95,34 +95,13 @@ public class Pokemon {
 	public void regen(int pv) {
 		int new_pv;
 		new_pv = this.getPv() + pv;
-		if (new_pv > this.getMax_pv())
+		if (new_pv > this.getMax_pv()) // yeah, they should not have higher hp than their maximum
 		{
 			this.setPv(this.getMax_pv());
 		}
 		else
 		{
 			this.setPv(new_pv);
-		}
-	}
-	public boolean P_flee(Pokemon adv)
-	{
-		float flee;
-		flee = (this.getVit() * 32) / ((adv.getVit()/4)%255) + 30; 
-		if (flee > 255)
-		{
-			return true;
-		}
-		else
-		{
-			flee = (float) Math.random()%255;
-			if (flee > 255)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
 		}
 	}
 	public void ouch(int pv)

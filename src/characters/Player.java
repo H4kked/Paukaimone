@@ -81,6 +81,7 @@ public class Player extends Trainer implements Sell{
 	}
 	public void pokesteal(Opponent opponent, Scanner keyboard)
 	{
+		// we give the opponent's pokemon full hp so the player doesn't get it with negative hp when playing
 		opponent.getPokemon().setPv(opponent.getPokemon().getMax_pv());
 		sys_talk("You have defeated " + opponent.getName() + " !");
 		sys_talk("Would you like to steal his pokemon ? (y/n)");
@@ -109,12 +110,14 @@ public class Player extends Trainer implements Sell{
 		}
 		if (ans == 'Y' || ans == 'y')
 		{
+			// this method makes the opponent's pokemon the player's
 			opponent.lose_pokemon(this);
 		}
 	}
 	public void capture()
 	{
 		int rand = (int) Math.random()%100;
+		// there's a one percent chance the pokemon flee
 		if (rand == 1)
 		{
 			sys_talk("You throw your pokeball to your fleeing pokemon...");
@@ -128,8 +131,10 @@ public class Player extends Trainer implements Sell{
 	}
 	@Override
 	public void sell(int i) {
+		// check if the user has the object
 		if (this.inventory[i] > 0)
 		{
+			// then remove it
 			this.inventory[i]--;
 			switch(i)
 			{
@@ -152,6 +157,8 @@ public class Player extends Trainer implements Sell{
 	}
 	@Override
 	public void buy(int i) {
+		// first we check if the player has the amount of money to buy the object
+		// the add the object and decrease the amount of money
 		switch(i)
 		{
 			case 1:

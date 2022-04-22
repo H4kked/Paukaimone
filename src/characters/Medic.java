@@ -17,6 +17,7 @@ public class Medic extends Character implements Heal {
 	// METHODS
 	@Override
 	public void heal(Pokemon pokemon) {
+		// the medic make the pokemon's hp full
 		pokemon.setPv(pokemon.getMax_pv());		
 	}
 	public void interaction(Player player, Scanner keyboard)

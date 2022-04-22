@@ -18,6 +18,7 @@ public class Opponent extends Trainer{
 	}
 	public void lose_pokemon(Player player)
 	{
+		// the player's instance "pokemon" is set to the instance "pokemon" of the opponent's one
 		talk("No way ! I lost !");
 		talk(this.getPokemon().getName() + " ? What are you doing ? Hey !\n");
 		player.setPokemon(this.getPokemon());

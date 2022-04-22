@@ -23,6 +23,7 @@ public class Loader {
 	private Medic medic;
 	
 	public Loader(Scanner keyboard) {
+		// we create those ones "manually" because there are just one of them per class
 		this.merchant = new Merchant("Benoit", "Merchant");
 		this.medic = new Medic("Mathilde", "Nurse");
 		this.setStarter(new Pokemon[3]);
@@ -170,6 +171,8 @@ public class Loader {
 	}
 	public Attack[] fLoadAttacks() throws FileNotFoundException
 	{
+		// as the pokemons, the attackas are extracted from a file and put into an array
+		// of array then dispatch between pokemons
 		Attack[] attack_list = new Attack[18];
 		String path = "./attaque_db.txt";
 		File attack_db = new File(path);
@@ -222,6 +225,8 @@ public class Loader {
 	}
 	public void fLoadTrainers(Scanner keyboard) throws FileNotFoundException
 	{
+		// put the trainers into a list while starting the game
+		// as well as the player (that why we have to start the game)
 		Opponent[] opponent_list = new Opponent[9];
 		Opponent[] master_list = new Opponent[2];
 		String path = "./opponent_db.txt";

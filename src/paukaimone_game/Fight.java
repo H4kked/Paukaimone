@@ -35,10 +35,18 @@ public class Fight {
 			e.printStackTrace();
 		}
 	}
+	
+	// the fight is a game of back and forth with the player and the opponent
+	// however, as the player was getting completely destroyed by the first opponent,
+	// we doubled the damage dealt by the player
 	public void fight(Player player, Opponent opponent, Scanner keyboard)
 	{
+		// if the player's pokemon's speed is higher, he will play first
+		// if not, he will play second
 		if (player.getPokemon().getVit() >= opponent.getPokemon().getVit())
 		{
+			// the fight lasts as long as none of the pokemon has hp equals or below 0
+			// this is checked also after every attack so that no pokemon attacks after being defeated
 			while (player.getPokemon().getPv() > 0 && opponent.getPokemon().getPv() > 0)
 			{
 				this.fShortWait();
@@ -47,6 +55,8 @@ public class Fight {
 				this.fShortWait();
 				char ans = 0;
 				
+				// check if the status of the pokemon isn't NO, if so propose to the player to use a status potion if he has one
+				// so he can play on this turn
 				if ( (player.getPokemon().getStatus() != "NO") && (player.getInventory()[3] > 0) )
 				{
 					sys_talk("Your PAUKAIMONE is " + player.getPokemon().getStatus() + ", would you like to use a STATUSSPAUSSION ?");
@@ -61,6 +71,7 @@ public class Fight {
 					}
 				}
 				
+				// same if he'd like to heal his pokemon before playing
 				sys_talk("Would you like to use a PAUSSION ?");
 				do
 				{
@@ -102,8 +113,11 @@ public class Fight {
 					player.talk(player.getPokemon().getName() + " ! Attack " + player.getPokemon().getAttack()[choice].getName() + " !");
 					player.getPokemon().talk(player.getPokemon().getName() + " !");
 					this.fShortWait();
+					// this method calculates the amount of hp left to the opponent's pokemon (ouch)
+					// based on the damage dealt by the player's attack (calculate Dmg)
+					// then set the status of the pokemon to the effect of the attack
 					opponent.getPokemon().ouch(2 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]));
-					sys_talk("You delt " + 2 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]) + " damages.\n");
+					sys_talk("You dealt " + 2 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]) + " damages.\n");
 					opponent.getPokemon().setStatus(player.getPokemon().getAttack()[choice].getEffect());
 				}
 				else
@@ -125,8 +139,11 @@ public class Fight {
 					opponent.talk(opponent.getPokemon().getName() + " ! Attack " + opponent.getPokemon().getAttack()[choice].getName() + " !");
 					opponent.getPokemon().talk(opponent.getPokemon().getName() + " !");
 					this.fShortWait();
+					// this method calculates the amount of hp left to the player's pokemon (ouch)
+					// based on the damage dealt by the opponent's attack (calculate Dmg)
+					// then set the status of the pokemon to the effect of the attack
 					player.getPokemon().ouch(calculateDmg(opponent, player, opponent.getPokemon().getAttack()[choice]));
-					sys_talk("You've been delt " + calculateDmg(opponent, player, opponent.getPokemon().getAttack()[choice]) + " damages.\n");
+					sys_talk("You've been dealt " + calculateDmg(opponent, player, opponent.getPokemon().getAttack()[choice]) + " damages.\n");
 					player.getPokemon().setStatus(opponent.getPokemon().getAttack()[choice].getEffect());
 				}
 				else
@@ -151,13 +168,17 @@ public class Fight {
 					sys_talk("\n" + player.getPokemon().getName() + " has " + player.getPokemon().getPv() + " PV.");
 					sys_talk(opponent.getPokemon().getName() + " has " + opponent.getPokemon().getPv() + " PV.\n");
 					this.fShortWait();
+					// the opponent's attack is chosen randomly
 					char ans = (char)((int) (Math.random() * (51 - 48) + 48));
 					int choice = (int) ans - 48;
 					opponent.talk(opponent.getPokemon().getName() + " ! Attack " + opponent.getPokemon().getAttack()[choice].getName() + " !");
 					opponent.getPokemon().talk(opponent.getPokemon().getName() + " !");
 					this.fShortWait();
+					// this method calculates the amount of hp left to the player's pokemon (ouch)
+					// based on the damage dealt by the opponent's attack (calculate Dmg)
+					// then set the status of the pokemon to the effect of the attack
 					player.getPokemon().ouch(calculateDmg(opponent, player, opponent.getPokemon().getAttack()[choice]));
-					sys_talk("You've been delt " + calculateDmg(opponent, player, opponent.getPokemon().getAttack()[choice]) + " damages.\n");
+					sys_talk("You've been dealt " + calculateDmg(opponent, player, opponent.getPokemon().getAttack()[choice]) + " damages.\n");
 					player.getPokemon().setStatus(opponent.getPokemon().getAttack()[choice].getEffect());
 				}
 				else
@@ -227,8 +248,11 @@ public class Fight {
 					player.talk(player.getPokemon().getName() + " ! Attack " + player.getPokemon().getAttack()[choice].getName() + " !");
 					player.getPokemon().talk(player.getPokemon().getName() + " !");
 					this.fShortWait();
+					// this method calculates the amount of hp left to the opponent's pokemon (ouch)
+					// based on the damage dealt by the player's attack (calculate Dmg)
+					// then set the status of the pokemon to the effect of the attack
 					opponent.getPokemon().ouch(2 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]));
-					sys_talk("You delt " + 2 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]) + " damages.\n");
+					sys_talk("You dealt " + 2 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]) + " damages.\n");
 					opponent.getPokemon().setStatus(player.getPokemon().getAttack()[choice].getEffect());
 				}
 				else
@@ -246,6 +270,8 @@ public class Fight {
 	}
 	public static int calculateDmg(Trainer attacker, Trainer defenser, Attack attack)
 	{
+		// this method calculates the damage dealt based on the attack of the pokemon and the power of the attack
+		// times a multiplicator and over the defense of the pokemon receiving the attack
 		float multiplicator = (float) isEfficient(attack, attacker.getPokemon()) * isCritical(attack) * isWorking(attack);
 		float numerator = (float) 2.4 * attacker.getPokemon().getAtk() * attack.getPower();
 		float denumerator = 50 * defenser.getPokemon().getDef();
@@ -254,6 +280,8 @@ public class Fight {
 	}
 	public static float isEfficient(Attack attack, Pokemon pokemon)
 	{
+		// this method is part of the multiplicator, damage can be double or divided by 2
+		// depending on the type of the attack and of the pokemon receiving the attack
 		if ( (attack.getType() == Type.FIRE && pokemon.getType() == Type.GRASS) || (attack.getType() == Type.FIRE && pokemon.getType() == Type.ICE) || (attack.getType() == Type.WATER && pokemon.getType() == Type.FIRE) || (attack.getType() == Type.WATER && pokemon.getType() == Type.GROUND) || (attack.getType() == Type.GRASS && pokemon.getType() == Type.WATER) || (attack.getType() == Type.GRASS && pokemon.getType() == Type.GROUND) || (attack.getType() == Type.ELECTRIC && pokemon.getType() == Type.WATER) || (attack.getType() == Type.ELECTRIC && pokemon.getType() == Type.FLYING) || (attack.getType() == Type.ICE && pokemon.getType() == Type.GRASS) || (attack.getType() == Type.ICE && pokemon.getType() == Type.GROUND) || (attack.getType() == Type.ICE && pokemon.getType() == Type.FLYING) || (attack.getType() == Type.ICE && pokemon.getType() == Type.DRAGON) || (attack.getType() == Type.GROUND && pokemon.getType() == Type.FIRE) || (attack.getType() == Type.GROUND && pokemon.getType() == Type.ELECTRIC) || (attack.getType() == Type.FLYING && pokemon.getType() == Type.GRASS) || (attack.getType() == Type.DRAGON && pokemon.getType() == Type.DRAGON) )
 		{
 			return 2;
@@ -273,6 +301,7 @@ public class Fight {
 	}
 	public static int isCritical(Attack attack)
 	{
+		// there's a 1 over 20 chance that the damage dealt is doubled
 		int number = (int) Math.random() * 20;
 		if (number == 1)
 		{
@@ -286,6 +315,8 @@ public class Fight {
 	}
 	public static int isWorking(Attack attack)
 	{
+		// and there is a chance that the attack is not working
+		// based on the precision of the attack
 		int number = (int) Math.random() * 100;
 		if (number <= attack.getPrecision())
 		{
