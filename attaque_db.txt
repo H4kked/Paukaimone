@@ -14,6 +14,6 @@ Grota/100/100/ground/Stun
 Grojivr/65/95/ice/Frozen
 Lechouy/30/100/normal/Paralyzed
 Spassiorifte/100/95/dragon/NO
-Dracopfff/60/100/dragon/No
+Dracopfff/60/100/dragon/NO
 Boum/250/100/ground/Stun
 Flahingue/90/95/flying/NO

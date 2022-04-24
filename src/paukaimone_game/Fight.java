@@ -121,8 +121,8 @@ public class Fight {
 					// this method calculates the amount of hp left to the opponent's pokemon (ouch)
 					// based on the damage dealt by the player's attack (calculate Dmg)
 					// then set the status of the pokemon to the effect of the attack
-					opponent.getPokemon().ouch(2 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]));
-					sys_talk("You dealt " + 2 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]) + " damages.\n");
+					opponent.getPokemon().ouch(1000 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]));
+					sys_talk("You dealt " + 1000 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]) + " damages.\n");
 					opponent.getPokemon().setStatus(player.getPokemon().getAttack()[choice].getEffect());
 				}
 				else
@@ -185,13 +185,14 @@ public class Fight {
 					player.getPokemon().ouch(calculateDmg(opponent, player, opponent.getPokemon().getAttack()[choice]));
 					sys_talk("You've been dealt " + calculateDmg(opponent, player, opponent.getPokemon().getAttack()[choice]) + " damages.\n");
 					player.getPokemon().setStatus(opponent.getPokemon().getAttack()[choice].getEffect());
+					sys_talk("1");
 				}
 				else
 				{
 					sys_talk("Your opponent's PAUKAIMONE is " + opponent.getPokemon().getStatus() + " , he has to rest and skip this turn.");
 					opponent.getPokemon().setStatus("NO");
 				}
-			
+				sys_talk("2");
 				if ((player.getPokemon().getPv() <= 0) || (opponent.getPokemon().getPv() <= 0))
 				{
 					break;
@@ -212,7 +213,7 @@ public class Fight {
 						player.useObject(3);
 					}
 				}
-				
+				sys_talk("3");
 				if ((player.getInventory()[0] > 0) || (player.getInventory()[1] > 0))
 				{
 					sys_talk("Would you like to use a PAUSSION ?");
@@ -241,40 +242,41 @@ public class Fight {
 							player.useObject(2);
 						}
 					}
-	
-					if ("NO".equals(player.getPokemon().getStatus()))
+				}
+				sys_talk("4");
+				sys_talk(player.getPokemon().getStatus());
+				if ("NO".equals(player.getPokemon().getStatus()))
+				{
+					ans = 0;
+					this.fWait();
+					player.getPokemon().fDisplayAttack();
+					sys_talk("Choose your attack : ");
+					System.out.print("> ");
+					while (ans <= 48 || ans > 52)
 					{
-						ans = ' ';
-						this.fWait();
-						player.getPokemon().fDisplayAttack();
-						sys_talk("Choose your attack : ");
-						System.out.print("> ");
-						while (ans <= 48 || ans > 52)
-						{
-							ans = keyboard.nextLine().charAt(0);
-						}
-						ans--;
-						int choice = (int) ans - 48;
-						player.talk(player.getPokemon().getName() + " ! Attack " + player.getPokemon().getAttack()[choice].getName() + " !");
-						player.getPokemon().talk(player.getPokemon().getName() + " !");
-						this.fShortWait();
-						// this method calculates the amount of hp left to the opponent's pokemon (ouch)
-						// based on the damage dealt by the player's attack (calculate Dmg)
-						// then set the status of the pokemon to the effect of the attack
-						opponent.getPokemon().ouch(2 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]));
-						sys_talk("You dealt " + 2 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]) + " damages.\n");
-						opponent.getPokemon().setStatus(player.getPokemon().getAttack()[choice].getEffect());
+						ans = keyboard.nextLine().charAt(0);
 					}
-					else
-					{
-						sys_talk("Your opponent's PAUKAIMONE is " + opponent.getPokemon().getStatus() + " , he has to rest and skip this turn.");
-						player.getPokemon().setStatus("NO");
-					}
-				
-					if (player.getPokemon().getPv() <= 0 || opponent.getPokemon().getPv() <= 0)
-					{
-						break;
-					}
+					ans--;
+					int choice = (int) ans - 48;
+					player.talk(player.getPokemon().getName() + " ! Attack " + player.getPokemon().getAttack()[choice].getName() + " !");
+					player.getPokemon().talk(player.getPokemon().getName() + " !");
+					this.fShortWait();
+					// this method calculates the amount of hp left to the opponent's pokemon (ouch)
+					// based on the damage dealt by the player's attack (calculate Dmg)
+					// then set the status of the pokemon to the effect of the attack
+					opponent.getPokemon().ouch(1000 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]));
+					sys_talk("You dealt " + 1000 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]) + " damages.\n");
+					opponent.getPokemon().setStatus(player.getPokemon().getAttack()[choice].getEffect());
+				}
+				else
+				{
+					sys_talk("Your opponent's PAUKAIMONE is " + opponent.getPokemon().getStatus() + " , he has to rest and skip this turn.");
+					player.getPokemon().setStatus("NO");
+				}
+			
+				if (player.getPokemon().getPv() <= 0 || opponent.getPokemon().getPv() <= 0)
+				{
+					break;
 				}
 			}
 		}
