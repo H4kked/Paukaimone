@@ -28,7 +28,7 @@ public class Medic extends Character implements Heal {
 		{
 			ans = keyboard.nextLine().charAt(0);
 		}
-		while (ans != 'y' || ans != 'Y' || ans != 'n' || ans != 'N');
+		while ((ans != 'y') && (ans != 'Y') && (ans != 'n') && (ans != 'N'));
 		if (ans == 'y' || ans == 'Y')
 		{
 			heal(player.getPokemon());

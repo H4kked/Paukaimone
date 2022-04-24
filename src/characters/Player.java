@@ -83,6 +83,7 @@ public class Player extends Trainer implements Sell{
 	{
 		// we give the opponent's pokemon full hp so the player doesn't get it with negative hp when playing
 		opponent.getPokemon().setPv(opponent.getPokemon().getMax_pv());
+		opponent.getPokemon().setStatus("NO");
 		sys_talk("You have defeated " + opponent.getName() + " !");
 		sys_talk("Would you like to steal his pokemon ? (y/n)");
 		char ans = 0;

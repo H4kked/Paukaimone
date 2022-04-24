@@ -18,8 +18,8 @@ public class Fight {
 	public void fWait()
 	{
 		try {
-			TimeUnit.SECONDS.sleep(4);
-			//TimeUnit.MILLISECONDS.sleep(100);
+			//TimeUnit.SECONDS.sleep(4);
+			TimeUnit.MILLISECONDS.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -28,8 +28,8 @@ public class Fight {
 	public void fShortWait()
 	{
 		try {
-			TimeUnit.SECONDS.sleep(2);
-			//TimeUnit.MILLISECONDS.sleep(100);
+			//TimeUnit.SECONDS.sleep(2);
+			TimeUnit.MILLISECONDS.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,47 +57,52 @@ public class Fight {
 				
 				// check if the status of the pokemon isn't NO, if so propose to the player to use a status potion if he has one
 				// so he can play on this turn
-				if ( (player.getPokemon().getStatus() != "NO") && (player.getInventory()[3] > 0) )
+				if ( (!"NO".equals(player.getPokemon().getStatus())) && (player.getInventory()[3] > 0) )
 				{
 					sys_talk("Your PAUKAIMONE is " + player.getPokemon().getStatus() + ", would you like to use a STATUSSPAUSSION ?");
 					do
 					{
+						sys_talk("> ");
 						ans = keyboard.nextLine().charAt(0);
 					}
-					while(ans != 'y' || ans != 'Y' || ans != 'n' || ans != 'N');
-					if (ans == 'y' || ans == 'Y')
+					while((ans != 'y') || (ans != 'Y') || (ans != 'n') || (ans != 'N'));
+					if ((ans != 'y') || (ans != 'Y'))
 					{
 						player.useObject(3);
 					}
 				}
 				
 				// same if he'd like to heal his pokemon before playing
-				sys_talk("Would you like to use a PAUSSION ?");
-				do
-				{
-					ans = keyboard.nextLine().charAt(0);
-				}
-				while(ans != 'y' || ans != 'Y' || ans != 'n' || ans != 'N');
-				if (ans == 'y' || ans == 'Y')
-				{
-					sys_talk("1 - PAUSSION			(20 PV)");
-					sys_talk("2 - ZUBERPAUSSION		(50 PV)");
+				if ((player.getInventory()[0] > 0) || (player.getInventory()[1] > 0))
+					{
+					ans = ' ';
+					sys_talk("Would you like to use a PAUSSION ?");
 					do
 					{
 						ans = keyboard.nextLine().charAt(0);
 					}
-					while(ans <= 48 || ans > 49);
-					if (ans == 48)
+					while((ans != 'y') || (ans != 'Y') || (ans != 'n') || (ans != 'N'));
+					if ((ans == 'y') || (ans == 'Y'))
 					{
-						player.useObject(1);
-					}
-					else
-					{
-						player.useObject(2);
+						sys_talk("1 - PAUSSION			(20 PV)");
+						sys_talk("2 - ZUBERPAUSSION		(50 PV)");
+						do
+						{
+							ans = keyboard.nextLine().charAt(0);
+						}
+						while(ans <= 48 || ans > 49);
+						if (ans == 48)
+						{
+							player.useObject(1);
+						}
+						else
+						{
+							player.useObject(2);
+						}
 					}
 				}
 				
-				if (player.getPokemon().getStatus() == "NO")
+				if ("NO".equals(player.getPokemon().getStatus()))
 				{
 					sys_talk(player.getPokemon().getName() + "'s attacks are :");
 					player.getPokemon().fDisplayAttack();
@@ -130,8 +135,8 @@ public class Fight {
 				{
 					break;
 				}
-				
-				if (opponent.getPokemon().getStatus() == "NO")
+				sys_talk(opponent.getPokemon().getStatus());
+				if ("NO".equals(opponent.getPokemon().getStatus()))
 				{
 					ans = (char)((int) (Math.random() * (51 - 48) + 48));
 					int choice = (int) ans - 48;
@@ -162,12 +167,12 @@ public class Fight {
 		{
 			while (player.getPokemon().getPv() > 0 && opponent.getPokemon().getPv() > 0)
 			{
-				if (opponent.getPokemon().getStatus() == "NO")
+				this.fWait();
+				sys_talk("\n" + player.getPokemon().getName() + " has " + player.getPokemon().getPv() + " PV.");
+				sys_talk(opponent.getPokemon().getName() + " has " + opponent.getPokemon().getPv() + " PV.\n");
+				this.fShortWait();
+				if ("NO".equals(opponent.getPokemon().getStatus()))
 				{
-					this.fWait();
-					sys_talk("\n" + player.getPokemon().getName() + " has " + player.getPokemon().getPv() + " PV.");
-					sys_talk(opponent.getPokemon().getName() + " has " + opponent.getPokemon().getPv() + " PV.\n");
-					this.fShortWait();
 					// the opponent's attack is chosen randomly
 					char ans = (char)((int) (Math.random() * (51 - 48) + 48));
 					int choice = (int) ans - 48;
@@ -187,83 +192,89 @@ public class Fight {
 					opponent.getPokemon().setStatus("NO");
 				}
 			
-				if (player.getPokemon().getPv() <= 0 || opponent.getPokemon().getPv() <= 0)
+				if ((player.getPokemon().getPv() <= 0) || (opponent.getPokemon().getPv() <= 0))
 				{
 					break;
 				}
 				
 				char ans = 0;
 				
-				if ( (player.getPokemon().getStatus() != "NO") && (player.getInventory()[3] > 0) )
+				if ( (!"NO".equals(player.getPokemon().getStatus())) && (player.getInventory()[3] > 0) )
 				{
 					sys_talk("Your PAUKAIMONE is " + player.getPokemon().getStatus() + ", would you like to use a STATUSSPAUSSION ?");
 					do
 					{
 						ans = keyboard.nextLine().charAt(0);
 					}
-					while(ans != 'y' || ans != 'Y' || ans != 'n' || ans != 'N');
-					if (ans == 'y' || ans == 'Y')
+					while((ans != 'y') || (ans != 'Y') || (ans != 'n') || (ans != 'N'));
+					if ((ans != 'y') || (ans != 'Y'))
 					{
 						player.useObject(3);
 					}
 				}
 				
-				sys_talk("Would you like to use a PAUSSION ?");
-				do
+				if ((player.getInventory()[0] > 0) || (player.getInventory()[1] > 0))
 				{
-					ans = keyboard.nextLine().charAt(0);
-				}
-				while(ans != 'y' || ans != 'Y' || ans != 'n' || ans != 'N');
-				if (ans == 'y' || ans == 'Y')
-				{
-					sys_talk("1 - PAUSSION			(20 PV)");
-					sys_talk("2 - ZUBERPAUSSION		(50 PV)");
+					sys_talk("Would you like to use a PAUSSION ?");
+					ans = ' ';
 					do
 					{
+						sys_talk("> ");
 						ans = keyboard.nextLine().charAt(0);
 					}
-					while(ans <= 48 || ans > 49);
-					if (ans == 48)
+					while((ans != 'y') || (ans != 'Y') || (ans != 'n') || (ans != 'N'));
+					if ((ans == 'y') || (ans == 'Y'))
 					{
-						player.useObject(1);
+						sys_talk("1 - PAUSSION			(20 PV)");
+						sys_talk("2 - ZUBERPAUSSION		(50 PV)");
+						do
+						{
+							ans = keyboard.nextLine().charAt(0);
+						}
+						while(ans <= 48 || ans > 49);
+						if (ans == 48)
+						{
+							player.useObject(1);
+						}
+						else
+						{
+							player.useObject(2);
+						}
+					}
+	
+					if ("NO".equals(player.getPokemon().getStatus()))
+					{
+						ans = ' ';
+						this.fWait();
+						player.getPokemon().fDisplayAttack();
+						sys_talk("Choose your attack : ");
+						System.out.print("> ");
+						while (ans <= 48 || ans > 52)
+						{
+							ans = keyboard.nextLine().charAt(0);
+						}
+						ans--;
+						int choice = (int) ans - 48;
+						player.talk(player.getPokemon().getName() + " ! Attack " + player.getPokemon().getAttack()[choice].getName() + " !");
+						player.getPokemon().talk(player.getPokemon().getName() + " !");
+						this.fShortWait();
+						// this method calculates the amount of hp left to the opponent's pokemon (ouch)
+						// based on the damage dealt by the player's attack (calculate Dmg)
+						// then set the status of the pokemon to the effect of the attack
+						opponent.getPokemon().ouch(2 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]));
+						sys_talk("You dealt " + 2 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]) + " damages.\n");
+						opponent.getPokemon().setStatus(player.getPokemon().getAttack()[choice].getEffect());
 					}
 					else
 					{
-						player.useObject(2);
+						sys_talk("Your opponent's PAUKAIMONE is " + opponent.getPokemon().getStatus() + " , he has to rest and skip this turn.");
+						player.getPokemon().setStatus("NO");
 					}
-				}
-
-				if (player.getPokemon().getStatus() == "NO")
-				{
-					this.fWait();
-					player.getPokemon().fDisplayAttack();
-					sys_talk("Choose your attack : ");
-					System.out.print("> ");
-					while (ans <= 48 || ans > 52)
+				
+					if (player.getPokemon().getPv() <= 0 || opponent.getPokemon().getPv() <= 0)
 					{
-						ans = keyboard.nextLine().charAt(0);
+						break;
 					}
-					ans--;
-					int choice = (int) ans - 48;
-					player.talk(player.getPokemon().getName() + " ! Attack " + player.getPokemon().getAttack()[choice].getName() + " !");
-					player.getPokemon().talk(player.getPokemon().getName() + " !");
-					this.fShortWait();
-					// this method calculates the amount of hp left to the opponent's pokemon (ouch)
-					// based on the damage dealt by the player's attack (calculate Dmg)
-					// then set the status of the pokemon to the effect of the attack
-					opponent.getPokemon().ouch(2 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]));
-					sys_talk("You dealt " + 2 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]) + " damages.\n");
-					opponent.getPokemon().setStatus(player.getPokemon().getAttack()[choice].getEffect());
-				}
-				else
-				{
-					sys_talk("Your opponent's PAUKAIMONE is " + opponent.getPokemon().getStatus() + " , he has to rest and skip this turn.");
-					player.getPokemon().setStatus("NO");
-				}
-			
-				if (player.getPokemon().getPv() <= 0 || opponent.getPokemon().getPv() <= 0)
-				{
-					break;
 				}
 			}
 		}

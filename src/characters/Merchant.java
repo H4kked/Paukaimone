@@ -40,7 +40,7 @@ public class Merchant extends Character implements Sell{
 		{
 			ans = keyboard.nextLine().charAt(0);
 		}
-		while (ans <= 49 || ans > 52);
+		while (ans <= 49 || ans > 53);
 		if (ans != 53)
 		{
 			player.buy(ans);
@@ -77,7 +77,7 @@ public class Merchant extends Character implements Sell{
 		{
 			ans = keyboard.nextLine().charAt(0);
 		}
-		while (ans <= 49 || ans > 52);
+		while (ans <= 49 || ans > 53);
 		if (ans != 53)
 		{
 			player.sell(ans);

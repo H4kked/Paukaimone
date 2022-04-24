@@ -21,8 +21,8 @@ public class Script {
 	public void fWait()
 	{
 		try {
-			TimeUnit.SECONDS.sleep(4);
-			//TimeUnit.MILLISECONDS.sleep(100);
+			//TimeUnit.SECONDS.sleep(4);
+			TimeUnit.MILLISECONDS.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -31,8 +31,8 @@ public class Script {
 	public void fShortWait()
 	{
 		try {
-			TimeUnit.SECONDS.sleep(2);
-			//TimeUnit.MILLISECONDS.sleep(100);
+			//TimeUnit.SECONDS.sleep(2);
+			TimeUnit.MILLISECONDS.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -168,18 +168,17 @@ public class Script {
 			}
 			load.getPlayer().pokesteal(load.getOpponent_list()[i], keyboard);
 			load.getPlayer().setMoney(load.getPlayer().getMoney() + 10);
-			sys_talk("\n You obtained 10 ¶ !\n");
+			sys_talk("\nYou obtained 10 ¶ !\n");
 			
-			switch(i)
+			if ((i == 2) || (i == 6))
 			{
-				case 2, 6:
-					load.getMerchant().introduce();
-					load.getMerchant().interaction_buy(load.getPlayer(), keyboard);
-					break;
-				case 3, 8:
-					load.getMedic().introduce();
-					load.getMedic().interaction(load.getPlayer(), keyboard);
-					break;
+				load.getMerchant().introduce();
+				load.getMerchant().interaction_buy(load.getPlayer(), keyboard);
+			}
+			if ((i == 3) || (i == 8))
+			{
+				load.getMedic().introduce();
+				load.getMedic().interaction(load.getPlayer(), keyboard);
 			}
 		}
 		
