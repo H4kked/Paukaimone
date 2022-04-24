@@ -1,7 +1,5 @@
 package paukaimone_game;
 
-// Import from java libraries
-
 // Import from sources
 import database_load.Loader;
 import java.util.Scanner;

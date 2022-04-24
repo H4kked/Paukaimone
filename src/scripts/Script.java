@@ -1,15 +1,11 @@
 package scripts;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 import java.util.concurrent.TimeUnit;
 import characters.Player;
 import database_load.Loader;
 import paukaimone_game.Fight;
-import characters.Merchant;
-import characters.Opponent;
-import characters.Medic;
 import pokemons.Pokemon;
 
 public class Script {

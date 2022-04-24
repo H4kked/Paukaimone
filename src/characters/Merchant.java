@@ -5,9 +5,6 @@ import java.util.Scanner;
 import interfaces.Sell;
 
 public class Merchant extends Character implements Sell{
-	// FIELDS
-	Integer[] inventory = new Integer[4];
-	
 	// CONSTRUCTOR
 	public Merchant(String name, String job) {
 		super(name, job);
