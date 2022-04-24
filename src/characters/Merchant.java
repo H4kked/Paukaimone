@@ -43,8 +43,8 @@ public class Merchant extends Character implements Sell{
 		while (ans <= 49 || ans > 53);
 		if (ans != 53)
 		{
-			player.buy(ans);
-			this.sell(ans);
+			player.buy(ans-1);
+			this.sell(ans-1);
 			talk("Would you like to buy something else hehe ? (y/n)");
 			ans = 0;
 			do
@@ -80,8 +80,8 @@ public class Merchant extends Character implements Sell{
 		while (ans <= 49 || ans > 53);
 		if (ans != 53)
 		{
-			player.sell(ans);
-			this.buy(ans);
+			player.sell(ans-1);
+			this.buy(ans-1);
 			talk("Would you like to sell something else hehe ? (y/n)");
 			ans = 0;
 			do

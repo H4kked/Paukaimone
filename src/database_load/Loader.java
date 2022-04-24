@@ -249,7 +249,7 @@ public class Loader {
 				System.out.print("> ");
 				String job = keyboard.nextLine();
 				this.setPlayer(new Player(name, job, this.getPoke_list()[9], 0));
-				Integer[] list = {0, 0, 1, 0};
+				Integer[] list = {0, 0, 5, 0};
 				this.getPlayer().setInventory(list);
 			}
 			else if (my_arr[0].equals("Pierre")) 

@@ -96,9 +96,9 @@ public class Player extends Trainer implements Sell{
 		if (ans == 'n' || ans == 'N')
 		{
 			// THE USER HAS A POKEBALL
-			if (this.inventory[3] > 0)
+			if (this.inventory[2] > 0)
 			{
-				this.inventory[3]--;
+				this.inventory[2]--;
 				capture();
 				this.getPokemon().setPv(this.getPokemon().getMax_pv());
 			}
