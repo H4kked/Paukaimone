@@ -18,8 +18,8 @@ public class Fight {
 	public void fWait()
 	{
 		try {
-			//TimeUnit.SECONDS.sleep(4);
-			TimeUnit.MILLISECONDS.sleep(100);
+			TimeUnit.SECONDS.sleep(4);
+			//TimeUnit.MILLISECONDS.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -28,8 +28,8 @@ public class Fight {
 	public void fShortWait()
 	{
 		try {
-			//TimeUnit.SECONDS.sleep(2);
-			TimeUnit.MILLISECONDS.sleep(100);
+			TimeUnit.SECONDS.sleep(2);
+			//TimeUnit.MILLISECONDS.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -121,8 +121,8 @@ public class Fight {
 					// this method calculates the amount of hp left to the opponent's pokemon (ouch)
 					// based on the damage dealt by the player's attack (calculate Dmg)
 					// then set the status of the pokemon to the effect of the attack
-					opponent.getPokemon().ouch(1000 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]));
-					sys_talk("You dealt " + 1000 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]) + " damages.\n");
+					opponent.getPokemon().ouch(2 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]));
+					sys_talk("You dealt " + 2 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]) + " damages.\n");
 					opponent.getPokemon().setStatus(player.getPokemon().getAttack()[choice].getEffect());
 				}
 				else
@@ -264,8 +264,8 @@ public class Fight {
 					// this method calculates the amount of hp left to the opponent's pokemon (ouch)
 					// based on the damage dealt by the player's attack (calculate Dmg)
 					// then set the status of the pokemon to the effect of the attack
-					opponent.getPokemon().ouch(1000 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]));
-					sys_talk("You dealt " + 1000 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]) + " damages.\n");
+					opponent.getPokemon().ouch(2 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]));
+					sys_talk("You dealt " + 2 * calculateDmg(player, opponent, player.getPokemon().getAttack()[choice]) + " damages.\n");
 					opponent.getPokemon().setStatus(player.getPokemon().getAttack()[choice].getEffect());
 				}
 				else

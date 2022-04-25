@@ -21,8 +21,8 @@ public class Script {
 	public void fWait()
 	{
 		try {
-			//TimeUnit.SECONDS.sleep(4);
-			TimeUnit.MILLISECONDS.sleep(100);
+			TimeUnit.SECONDS.sleep(4);
+			//TimeUnit.MILLISECONDS.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -31,8 +31,8 @@ public class Script {
 	public void fShortWait()
 	{
 		try {
-			//TimeUnit.SECONDS.sleep(2);
-			TimeUnit.MILLISECONDS.sleep(100);
+			TimeUnit.SECONDS.sleep(2);
+			//TimeUnit.MILLISECONDS.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
